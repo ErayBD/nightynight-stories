@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">SpeechToText</string>
+    <string name="recognize_microphone">Preparing\n</string>
+    <string name="preparing">Starting\n</string>
+    <string name="failed">Error\n</string>
+    <string name="starting">Preparing\n</string>
+    <string name="say_something">Ready\n</string>
+
+    <string name="storypart_1">Mavi, annesiyle birlikte köyde oyun oynuyordu. Yeşil çimenlerle kaplı bu güzel köy, ahşap evler ve rengarenk çiçeklerle doluydu. Mavi, sevinçle zıplıyor, annesi ise ona sevgiyle bakıyordu. Her şey çok güzel ve huzurluydu.</string>
+    <string name="storypart_2">Bir gün Mavi, ormanda dolaşırken kayboldu. Ağaçlar çok büyüktü ve orman karanlıktı. Mavi, hangi yöne gitmesi gerektiğini bilmiyordu ve çok korkmuştu. Etrafındaki her şey ona yabancı geliyordu.</string>
+    <string name="storypart_3">Ormanda ilerlerken Mavi, uzaklarda parlayan gizemli bir ışık gördü. Işık o kadar parlaktı ki etrafındaki her şeyi aydınlatıyordu. Mavi, bu ışığa doğru çekildi ve merakla onu izlemeye başladı.</string>
+    <string name="storypart_4">Mavi, bilge bir baykuşla karşılaştı. Baykuş, yüksek bir dala tünemiş, büyük gözleriyle Mavi&quot;ye bakıyordu. &quot;Ormanda güvende kalmak istiyorsan, dikkatli olmalısın,&quot; dedi baykuş. Mavi, baykuşun söylediklerini dikkatle dinledi.</string>
+    <string name="storypart_5">Ormanda yolunu bulmaya çalışırken Mavi, harita okuyan bir kirpiyle karşılaştı. Kirpi, Mavi&quot;ye yardım etmek için haritayı inceledi ve doğru yolu gösterdi. Mavi&quot;nin içi umutla doldu, çünkü sonunda doğru yolu bulabileceğini düşündü.</string>
+    <string name="storypart_6">Mavi, büyük ve hızlı akan bir nehirle karşılaştı. Nehir o kadar güçlüydü ki Mavi&quot;nin karşıya geçmesi imkansız gibi görünüyordu. Mavi, ne yapacağını bilemeden nehri izlemeye başladı. İçinde büyük bir korku vardı.</string>
+    <string name="storypart_7">Tam o sırada, nehirde yaşayan kurbağalar Mavi&quot;ye yardım etmeye karar verdiler. Kurbağalar, suyun üzerinde bir taş köprü oluşturarak Mavi&quot;nin güvenle karşıya geçmesini sağladılar. Mavi, arkadaşlarının yardımıyla karşıya geçebildiği için çok mutluydu.</string>
+    <string name="storypart_8">Mavi, ormanın derinliklerinde dev bir kaplumbağayla karşılaştı. Kaplumbağa, ağır adımlarla Mavi&quot;yi ormandan çıkış yoluna götürdü. Mavi, kaplumbağaya minnettar bir şekilde baktı, çünkü sonunda eve dönebilecekti.</string>
+    <string name="storypart_9">Mavi, nihayet köyüne döndü. Arkadaşları ve ailesi onu büyük bir coşkuyla karşıladılar. Mavi, yaşadığı tüm zorlukları atlattığı için çok mutluydu. Köydeki herkes, Mavi&quot;nin geri dönüşünü kutladı.</string>
+    <string name="storypart_10">Mavi, gün batımında ormanın kenarında oturup yaşadığı macerayı düşündü. Gökyüzü, turuncu ve pembe tonlarına bürünmüştü. Mavi, huzur içinde gülümsedi ve eve dönebildiği için şükretti. Artık ormanın tehlikeleri ona o kadar korkutucu gelmiyordu.</string>
+</resources>

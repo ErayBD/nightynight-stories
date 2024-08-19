@@ -1,0 +1,92 @@
+plugins {
+    alias(libs.plugins.android.application)
+}
+
+android {
+    namespace 'com.erayberkdalkiran.speechtotext'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.erayberkdalkiran.speechtotext"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndkVersion = "27.0.12077973"
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64', 'x86'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        buildConfig false
+        viewBinding true
+    }
+
+    sourceSets {
+        main {
+            assets.srcDirs += "$buildDir/generated/assets"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/INDEX.LIST'
+    }
+}
+
+dependencies {
+    // OkHTTP and JSON
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+    implementation 'org.json:json:20240303'
+
+    // Google Cloud API
+    implementation 'com.google.cloud:google-cloud-speech:4.42.0'
+    implementation 'com.google.auth:google-auth-library-oauth2-http:1.24.0'
+
+    // gRPC OkHttp Channel
+    implementation 'io.grpc:grpc-okhttp:1.65.1'
+    implementation 'io.grpc:grpc-stub:1.65.1'
+    implementation 'com.google.api:gax:2.51.0'
+
+    // Vosk API SDK
+    implementation 'net.java.dev.jna:jna:5.14.0@aar'
+    implementation 'com.alphacephei:vosk-android:0.3.47@aar'
+
+    // AndroidX Libraries
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.activity
+    implementation libs.constraintlayout
+
+    // Testing Libraries
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+}
+
+tasks.register('genUUID') {
+    def uuid = UUID.randomUUID().toString()
+    def odir = file("$buildDir/generated/assets/model-tr")
+    def ofile = file("$odir/uuid")
+    doLast {
+        mkdir odir
+        ofile.text = uuid
+    }
+}
+preBuild.dependsOn(genUUID)

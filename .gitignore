@@ -1,0 +1,72 @@
+# Android Studio / IntelliJ IDEA
+.idea/
+*.iml
+
+# Android specific
+*.apk
+*.ap_
+*.dex
+*.class
+*.jar
+*.war
+*.ear
+*.classpath
+*.project
+*.settings/
+.cache/
+*.keystore
+captures/
+output.json
+*.cxx/
+.externalNativeBuild/
+.DS_Store
+
+# Built application files
+/build/
+*/build/
+**/build/
+
+# Gradle files
+.gradle/
+local.properties
+gradle-app.setting
+gradle-wrapper.jar
+gradle-wrapper.properties
+
+# Gradle caches (avoiding long re-downloads)
+**/out/
+**/.gradle/
+
+# Proguard
+proguard/
+proguard-rules.pro
+
+# Log files
+*.log
+
+# SQLite files
+*.sqlite
+*.sqlite3
+
+# Other files
+*.swp
+*.lock
+*.orig
+
+# Generated files
+gen/
+bin/
+obj/
+
+# Google Services
+speech2text.json
+
+# Media files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp4
+*.avi
+*.mov
+*.webp

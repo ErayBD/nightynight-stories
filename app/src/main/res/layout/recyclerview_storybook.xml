@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:background="#2E9DE7"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <TextView
+            android:id="@+id/storybook_chapterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:fontFamily="monospace"
+            android:text="Bölüm: X"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="italic" />
+
+        <ImageView
+            android:id="@+id/storybook_promptMic"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/mic_on" />
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/storybook_img"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/bluebunny_1"
+        android:layout_gravity="center"/>
+
+    <VideoView
+        android:id="@+id/storybook_video"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/storybook_promptText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:fontFamily="serif"
+        android:justificationMode="inter_word"
+        android:lineSpacingMultiplier="1.5"
+        android:text="Miyav Miyav Miyav Miyav Miyav Miyav Miyav Miyav Miyav Miyav Miyav Miyav Miyav Miyav "
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+
+</LinearLayout>
