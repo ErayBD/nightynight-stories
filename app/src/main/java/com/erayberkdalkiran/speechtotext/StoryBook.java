@@ -2,12 +2,15 @@ package com.erayberkdalkiran.speechtotext;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.text.LineBreaker;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.erayberkdalkiran.speechtotext.databinding.ActivityGooglecloudBinding;
 import com.erayberkdalkiran.speechtotext.databinding.ActivityStorybookBinding;
@@ -40,7 +44,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class StoryBook extends AppCompatActivity {
 
@@ -51,9 +58,6 @@ public class StoryBook extends AppCompatActivity {
     private AudioRecord audioRecord;
     private boolean isRecording = false;
     private StringBuilder fullTranscript = new StringBuilder();
-    private int totalWordCount = 0;
-    private int correctWordCount = 0;
-    private boolean videoPlayed = false;
 
     private static final int SAMPLE_RATE = 16000;
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
@@ -93,6 +97,10 @@ public class StoryBook extends AppCompatActivity {
                     videoList.get(i),
                     textToReadList.get(i)
             ));
+            // İlk hikayeyi her zaman aktif yap
+            if (i == 0) {
+                storyBookList.get(0).isActive = true;
+            }
         }
 
         // Adapter ve RecyclerView yapılandırma
@@ -137,19 +145,26 @@ public class StoryBook extends AppCompatActivity {
     }
 
     private void startListening(int position, StoryBookClass storyBook) {
-        fullTranscript.setLength(0);  // fullTranscript'i sıfırla
-
-        if (isRecording) {
-            stopListening();
-            return;
-        }
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, REQUEST_RECORD_AUDIO_PERMISSION);
             return;
         }
 
-        isRecording = true;
+        fullTranscript.setLength(0);  // fullTranscript'i sıfırla
+
+        // dinleme aciksa durdur
+        if (isRecording) {
+            stopListening();
+            updateMicButtonVisual(position, R.drawable.mic_off);
+            return;
+        }
+        // dinleme kapaliysa baslat
+        else {
+            isRecording = true;
+            resetTextHighlighting(position); // dinleme baslatildiginda metni sifirla
+            updateMicButtonVisual(position, R.drawable.mic_on);
+        }
 
         int bufferSize = AudioRecord.getMinBufferSize(SAMPLE_RATE,
                 AudioFormat.CHANNEL_IN_MONO,
@@ -254,6 +269,16 @@ public class StoryBook extends AppCompatActivity {
         }).start();
     }
 
+    private void updateMicButtonVisual(int position, int drawableResId) {
+        runOnUiThread(() -> {
+            RecyclerView.ViewHolder viewHolder = binding.recyclerView.findViewHolderForAdapterPosition(position);
+            if (viewHolder != null) {
+                ImageView micImageView = viewHolder.itemView.findViewById(R.id.storybook_promptMic); // Buton yerine ImageView bul
+                micImageView.setImageResource(drawableResId); // Görseli güncelle
+            }
+        });
+    }
+
     private void stopListening() {
         isRecording = false;
         if (audioRecord != null) {
@@ -263,72 +288,113 @@ public class StoryBook extends AppCompatActivity {
         }
     }
 
+    private void resetTextHighlighting(int position) {
+        StoryBookClass storyBook = storyBookList.get(position);
+
+        // Seçilen StoryBookClass için match durumlarını sıfırla
+        Collections.fill(storyBook.wordMatchStatus, Boolean.FALSE);
+        storyBook.permanentlyMatchedIndices.clear();
+
+        // Metni eski haline getir
+        String originalText = storyBook.textToRead;
+        StringBuilder normalText = new StringBuilder();
+
+        String[] words = originalText.split("\\s+");
+        for (String word : words) {
+            normalText.append(word).append(" ");
+        }
+
+        // Metni güncelle
+        runOnUiThread(() -> {
+            RecyclerView.ViewHolder viewHolder = binding.recyclerView.findViewHolderForAdapterPosition(position);
+            if (viewHolder != null) {
+                TextView promptTextView = viewHolder.itemView.findViewById(R.id.storybook_promptText);
+                promptTextView.setText(normalText.toString().trim());
+                promptTextView.setLineSpacing(0, 1.5f);
+            } else {
+                // Eğer viewHolder null ise, adaptöre pozisyonun değiştiğini bildir
+                adapter.notifyItemChanged(position);
+            }
+        });
+    }
+
+
     private void processTranscript(String transcript, int position, boolean isFinal) {
+        String expectedText = storyBookList.get(position).textToRead;
+        StoryBookClass currentStoryBook = storyBookList.get(position);
+
         if (isFinal) {
-            fullTranscript.append(transcript).append(" "); // Final sonuçları fullTranscript'e ekle
-        } else {
-            // Sadece geçici transkript ise currentText'i güncelle
             fullTranscript.append(transcript).append(" ");
         }
 
-        // Şu anki gösterilecek metin, final sonuçsa fullTranscript, değilse geçici transkript
-        String currentText = isFinal ? fullTranscript.toString().trim() : transcript.trim();
-
-        Log.d("FullTranscript", "Current Transcript: " + currentText);
-
-        String expectedText = storyBookList.get(position).textToRead;
-
-        // Temizlenmiş metinler (noktalama işaretleri ve küçük harfler)
+        String workingText = isFinal ? fullTranscript.toString().trim() : transcript.trim();
         String cleanedExpectedText = expectedText.replaceAll("[^a-zA-ZğüşıöçĞÜŞİÖÇ\\s]", "").toLowerCase();
-        String cleanedCurrentText = currentText.replaceAll("[^a-zA-ZğüşıöçĞÜŞİÖÇ\\s]", "").toLowerCase();
+        String cleanedWorkingText = workingText.replaceAll("[^a-zA-ZğüşıöçĞÜŞİÖÇ\\s]", "").toLowerCase();
 
-        // Loglar
-        Log.d("wordsInExpectedText", "Expected Text: " + cleanedExpectedText);
-        Log.d("wordsInTranscript", "Speech to Text: " + cleanedCurrentText);
-
-        // Kelimeleri doğru eşleştir
         String[] wordsInExpectedText = cleanedExpectedText.split("\\s+");
-        String[] wordsInCurrentText = cleanedCurrentText.split("\\s+");
+        String[] wordsInWorkingText = cleanedWorkingText.split("\\s+");
 
-        totalWordCount = wordsInExpectedText.length;
-        correctWordCount = 0;  // Doğru kelime sayısını sıfırla
         StringBuilder highlightedText = new StringBuilder();
-        int originalWordIndex = 0;
+        int matchCount = 0;
 
-        for (int i = 0; i < wordsInExpectedText.length; i++) {
+        String[] originalWords = expectedText.split("\\s+");
+        int originalWordIndex = 0;
+        int workingWordIndex = 0;
+
+        for (String expectedWord : wordsInExpectedText) {
             boolean wordMatched = false;
-            for (int j = originalWordIndex; j < wordsInCurrentText.length; j++) {
-                if (wordsInExpectedText[i].equalsIgnoreCase(wordsInCurrentText[j])) {
-                    highlightedText.append("<font color='#00FF00'>").append(expectedText.split("\\s+")[i]).append("</font> ");
-                    originalWordIndex = j + 1;
-                    wordMatched = true;
-                    correctWordCount++;
-                    break;
+
+            if (currentStoryBook.permanentlyMatchedIndices.contains(originalWordIndex)) {
+                highlightedText.append("<font color='#00FF00'>").append(originalWords[originalWordIndex]).append("</font> ");
+                wordMatched = true;
+            } else if (currentStoryBook.wordMatchStatus.get(originalWordIndex)) {
+                highlightedText.append("<font color='#00FF00'>").append(originalWords[originalWordIndex]).append("</font> ");
+                wordMatched = true;
+                currentStoryBook.permanentlyMatchedIndices.add(originalWordIndex);
+            } else {
+                while (workingWordIndex < wordsInWorkingText.length) {
+                    if (wordsInWorkingText[workingWordIndex].equalsIgnoreCase(expectedWord)) {
+                        highlightedText.append("<font color='#00FF00'>").append(originalWords[originalWordIndex]).append("</font> ");
+                        currentStoryBook.wordMatchStatus.set(originalWordIndex, true);
+                        currentStoryBook.permanentlyMatchedIndices.add(originalWordIndex);
+                        wordMatched = true;
+                        workingWordIndex++;
+                        break;
+                    }
+                    workingWordIndex++;
                 }
             }
+
             if (!wordMatched) {
-                highlightedText.append(expectedText.split("\\s+")[i]).append(" ");
+                highlightedText.append(originalWords[originalWordIndex]).append(" ");
+            } else {
+                matchCount++;
             }
+            originalWordIndex++;
         }
 
-        // Metni yeşile dönüştür
         runOnUiThread(() -> {
             TextView promptTextView = binding.recyclerView.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.storybook_promptText);
             promptTextView.setText(Html.fromHtml(highlightedText.toString()), TextView.BufferType.SPANNABLE);
             promptTextView.setLineSpacing(0, 1.5f);
         });
 
-        // Doğru okunan kelimelerin yüzdesini hesapla ve %80'den fazlaysa videoyu oynat
-        StoryBookClass currentStoryBook = storyBookList.get(position);
-        if (isFinal && !currentStoryBook.videoPlayed) {  // Her bölüm için video oynatılıp oynatılmadığını kontrol edin
-            float correctPercentage = ((float) correctWordCount / totalWordCount) * 100;
-            if (correctPercentage >= 80) {
-                currentStoryBook.videoPlayed = true;  // Bu bölümde video oynatıldığını işaretleyin
+        if (isFinal) {
+            float correctPercentage = ((float) matchCount / wordsInExpectedText.length) * 100;
+            if (!currentStoryBook.videoPlayed && correctPercentage >= 80) {
+                currentStoryBook.videoPlayed = true;
                 StoryBookAdapter.StoryBookHolder holder = (StoryBookAdapter.StoryBookHolder) binding.recyclerView.findViewHolderForAdapterPosition(position);
                 playVideo(holder.imageView, holder.videoView, "android.resource://" + getPackageName() + "/" + currentStoryBook.video);
+
+                // Bir sonraki bölümü aktif hale getirme
+                if (position + 1 < storyBookList.size()) {
+                    storyBookList.get(position + 1).isActive = true;
+                    runOnUiThread(() -> adapter.notifyItemChanged(position + 1));
+                }
             }
         }
     }
+    
 
     @Override
     protected void onDestroy() {
@@ -337,6 +403,7 @@ public class StoryBook extends AppCompatActivity {
             speechClient.close();
         }
     }
+
 
     private void playVideo(ImageView imageView, VideoView videoView, String videoUrl) {
         imageView.setVisibility(View.GONE);

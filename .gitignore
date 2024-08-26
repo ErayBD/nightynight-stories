@@ -1,3 +1,21 @@
+app/.gitignore
+*.iml
+.gradle
+.idea
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
 # Android Studio / IntelliJ IDEA
 .idea/
 *.iml
@@ -19,7 +37,6 @@ captures/
 output.json
 *.cxx/
 .externalNativeBuild/
-.DS_Store
 
 # Built application files
 /build/
@@ -28,6 +45,7 @@ output.json
 
 # Gradle files
 .gradle/
+build/
 local.properties
 gradle-app.setting
 gradle-wrapper.jar
@@ -51,6 +69,7 @@ proguard-rules.pro
 # Other files
 *.swp
 *.lock
+*.DS_Store
 *.orig
 
 # Generated files
@@ -70,3 +89,4 @@ speech2text.json
 *.avi
 *.mov
 *.webp
+

@@ -252,7 +252,7 @@ public class GoogleCloudActivity extends AppCompatActivity {
     }
 
     public void triggerImageToVideo(@Nullable String prompt) {
-        String imageURL = "https://d2jqrm6oza8nb6.cloudfront.net/datasets/609a94dd-6604-43ef-a2dd-b7d2f37fd535.webp?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZjI1ZjE0ODFkNWJjYzkzMiIsImJ1Y2tldCI6InJ1bndheS1kYXRhc2V0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTcyMzc2NjQwMH0.iQfehGQTGt-Q7HTU2PtwZ0LYAsX6JjhyuEygSwDiqGg";
+        String imageURL = "https://d2jqrm6oza8nb6.cloudfront.net/datasets/609a94dd-6604-43ef-a2dd-b7d2f37fd535.webp?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZjI1ZjE0ODFkNWJjYzkzMiIsImJ1Y2tldCI6InJ1bndheS1kYXRhc2V0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTcyNDQ1NzYwMH0.Ef6aKT8t8B3qz9425bnt3LvJFFP2mZN_uj7z-Cx_7oo";
         String prompt_speech = "The cat drives the tractor through a colorful field";
         String prompt_text = prompt;
 
@@ -306,8 +306,6 @@ public class GoogleCloudActivity extends AppCompatActivity {
             Log.e("VideoViewError", "Error: " + what + ", " + extra);
             return true;
         });
-
-
     }
 
     @Override

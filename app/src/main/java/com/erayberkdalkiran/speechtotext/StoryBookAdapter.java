@@ -49,17 +49,36 @@ public class StoryBookAdapter extends RecyclerView.Adapter<StoryBookAdapter.Stor
     @Override
     public void onBindViewHolder(@NonNull StoryBookHolder holder, int position) {
         StoryBookClass storyBook = storyBookArrayList.get(position);
-        holder.binding.storybookChapterName.setText(storyBook.chapterName);
+        holder.binding.storybookChapterName.setText(storyBook.title);
         holder.imageView.setImageResource(storyBook.image);
         holder.videoView.setVideoURI(Uri.parse("android.resource://" + holder.itemView.getContext().getPackageName() + "/" + storyBook.video));
         holder.binding.storybookPromptText.setText(storyBook.textToRead);
 
+        // Bölüm aktifse, normal görünüm ve tıklanabilirlik ayarları
+        if (storyBook.isActive) {
+            holder.binding.storybookPromptMic.setImageResource(R.drawable.mic_off);
+            holder.binding.storybookChapterName.setAlpha(1.0f);
+            holder.binding.storybookImg.setAlpha(1.0f);
+            holder.binding.storybookPromptText.setAlpha(1.0f);
+            holder.binding.storybookPromptMic.setAlpha(1.0f);
+            holder.binding.storybookPromptMic.setClickable(true);
+        } else {
+            // Bölüm inaktifse, gri tonlar ve tıklanamaz halde
+            holder.binding.storybookPromptMic.setImageResource(R.drawable.mic_locked);
+            holder.binding.storybookChapterName.setAlpha(0.5f);
+            holder.binding.storybookImg.setAlpha(0.5f);
+            holder.binding.storybookPromptText.setAlpha(0.5f);
+            holder.binding.storybookPromptMic.setAlpha(0.5f);
+            holder.binding.storybookPromptMic.setClickable(false);
+        }
+
         holder.binding.storybookPromptMic.setOnClickListener(v -> {
-            if (micClickListener != null) {
+            if (micClickListener != null && storyBook.isActive) {
                 micClickListener.onMicClick(position, storyBook);
             }
         });
     }
+
 
     @Override
     public int getItemCount() {

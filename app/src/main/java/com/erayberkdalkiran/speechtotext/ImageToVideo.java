@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ImageToVideo {
-    private static final String AUTH_KEY = "1f264004ed4f64de48320d576a6bbb0ce";
+    private static final String AUTH_KEY = "13db1a58333e24894adbc9b5661a99385";
     private static final OkHttpClient client = new OkHttpClient();
     private static final Logger LOGGER = Logger.getLogger(ImageToVideo.class.getName());
 
