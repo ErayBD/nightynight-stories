@@ -1,19 +1,8 @@
 # Android Studio / IntelliJ IDEA
-/.idea/
-/*.iml
+.idea/
+*.iml
 
-# Local configuration
-/local.properties
-
-# Gradle files
-.gradle/
-/build/
-/local.properties
-gradle-app.setting
-gradle-wrapper.jar
-gradle-wrapper.properties
-
-# Android specific files
+# Android specific
 *.apk
 *.ap_
 *.dex
@@ -24,18 +13,26 @@ gradle-wrapper.properties
 *.classpath
 *.project
 *.settings/
-/.cache/
+.cache/
 *.keystore
 captures/
 output.json
 *.cxx/
-/externalNativeBuild/
-app/.gitignore
+.externalNativeBuild/
 
 # Built application files
 /build/
 */build/
 **/build/
+app/release
+
+# Gradle files
+.gradle/
+build/
+local.properties
+gradle-app.setting
+gradle-wrapper.jar
+gradle-wrapper.properties
 
 # Gradle caches (avoiding long re-downloads)
 **/out/

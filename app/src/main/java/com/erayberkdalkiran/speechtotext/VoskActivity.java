@@ -303,8 +303,8 @@ public class VoskActivity extends AppCompatActivity implements RecognitionListen
     }
 
     private void triggerImageToVideo(@Nullable String prompt) {
-        String imageURL = "https://d2jqrm6oza8nb6.cloudfront.net/datasets/609a94dd-6604-43ef-a2dd-b7d2f37fd535.webp?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZjI1ZjE0ODFkNWJjYzkzMiIsImJ1Y2tldCI6InJ1bndheS1kYXRhc2V0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTcyMzc2NjQwMH0.iQfehGQTGt-Q7HTU2PtwZ0LYAsX6JjhyuEygSwDiqGg";
-        String prompt_speech = "The cat drives the tractor through a colorful field";
+        String imageURL = "https://drive.google.com/file/d/1H08G4T6DU0GNMZ4Xn0_GBlw55LUmkdjE/view";
+        String prompt_speech = "Animate a scene in a cozy bunny village during a bright, sunny day. The blue bunny named Mavi is happily playing with his mother in a lush green meadow. The wind gently blows through colorful flowers and small wooden houses in the background. Mavi hops around joyfully, while his mother watches with a loving smile. Birds chirp in the distance, and the sunlight filters through the trees, creating a warm and cheerful atmosphere.";
         String prompt_text = prompt;
 
         new Thread(() -> {
