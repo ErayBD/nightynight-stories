@@ -381,7 +381,7 @@ public class StoryBook extends AppCompatActivity {
 
         if (isFinal) {
             float correctPercentage = ((float) matchCount / wordsInExpectedText.length) * 100;
-            if (!currentStoryBook.videoPlayed && correctPercentage >= 80) {
+            if (!currentStoryBook.videoPlayed && correctPercentage >= 95) {
                 currentStoryBook.videoPlayed = true;
                 StoryBookAdapter.StoryBookHolder holder = (StoryBookAdapter.StoryBookHolder) binding.recyclerView.findViewHolderForAdapterPosition(position);
                 playVideo(holder.imageView, holder.videoView, "android.resource://" + getPackageName() + "/" + currentStoryBook.video);
@@ -389,6 +389,7 @@ public class StoryBook extends AppCompatActivity {
                 // Bir sonraki bölümü aktif hale getirme
                 if (position + 1 < storyBookList.size()) {
                     storyBookList.get(position + 1).isActive = true;
+                    Toast.makeText(this, "Tebrikler! " + (position + 2) + ". bölümün kilidi açıldı!", Toast.LENGTH_LONG).show();
                     runOnUiThread(() -> adapter.notifyItemChanged(position + 1));
                 }
             }

@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="modern_light_gray">#F5F5F5</color>
+    <color name="modern_gray">#9E9E9E</color>
+    <color name="modern_accent_color">#6200EE</color>
+    <color name="modern_accent_light">#BB86FC</color>
+    <color name="modern_accent_dark">#3700B3</color>
 </resources>

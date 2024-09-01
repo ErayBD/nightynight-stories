@@ -5,81 +5,130 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:padding="16dp"
     tools:context=".MainActivity"
-    android:background="#E4DCDC">
+    android:background="#E4DCDC"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
 
-    <Button
-        android:id="@+id/storybookButton"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="75dp"
-        android:layout_marginEnd="175dp"
-        android:backgroundTint="#2E9DE7"
-        android:text="Story Book 1\n\n-----\n\nMavi"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:src="@drawable/splash_menu"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <Button
-        android:id="@+id/storybookButton_2"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="175dp"
-        android:layout_marginTop="75dp"
-        android:backgroundTint="#5B902525"
-        android:text="Story Book 2\n\nxxxxx"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="16dp"/>
 
-    <Button
-        android:id="@+id/storybookButton_3"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="175dp"
-        android:backgroundTint="#5B902525"
-        android:text="Story Book 3\n\nxxxxx"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView1"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:cardCornerRadius="60dp"
+        app:cardElevation="8dp"
+        app:layout_constraintTop_toBottomOf="@id/imageView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/storybookButton" />
+        android:layout_marginTop="16dp">
 
-    <Button
-        android:id="@+id/storybookButton_4"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="175dp"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="#5B902525"
-        android:text="Story Book 4\n\nxxxxx"
+        <ImageView
+            android:id="@+id/storybookButton_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/menusplash_storybook1"
+            android:scaleType="centerCrop"
+            android:paddingBottom="8dp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        app:cardCornerRadius="60dp"
+        app:cardElevation="8dp"
+        app:layout_constraintTop_toBottomOf="@id/cardView1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
+
+        <ImageView
+            android:id="@+id/storybookButton_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/menusplash_storybook2"
+            android:scaleType="centerCrop"
+            android:paddingTop="18dp"
+            android:alpha="0.5"/>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/mic_locked"
+            android:layout_gravity="start|center_vertical"
+            app:tint="@color/modern_gray" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        app:cardCornerRadius="60dp"
+        app:cardElevation="8dp"
+        app:layout_constraintTop_toBottomOf="@id/cardView2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/storybookButton_2" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
 
+        <ImageView
+            android:id="@+id/storybookButton_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/menusplash_storybook3"
+            android:scaleType="centerCrop"
+            android:paddingBottom="6dp"
+            android:alpha="0.5"/>
 
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/mic_locked"
+            android:layout_gravity="start|center_vertical"
+            app:tint="@color/modern_gray" />
+    </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/voskButton"
+    <LinearLayout
+        android:id="@+id/buttonContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
-        android:text="Vosk SDK"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/cardView3"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="20dp"
+        android:visibility="invisible">
 
-    <Button
-        android:id="@+id/googleCloudButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/black"
-        android:text="Google Cloud"
-        app:layout_constraintBottom_toTopOf="@+id/voskButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/voskButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:backgroundTint="@color/modern_accent_color"
+            android:text="Vosk SDK"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="12dp"/>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/googleCloudButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:backgroundTint="@color/modern_accent_color"
+            android:text="Google Cloud"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="12dp"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

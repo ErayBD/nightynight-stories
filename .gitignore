@@ -1,26 +1,19 @@
-app/.gitignore
-*.iml
-.gradle
-.idea
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
-
 # Android Studio / IntelliJ IDEA
-.idea/
-*.iml
+/.idea/
+/*.iml
 
-# Android specific
+# Local configuration
+/local.properties
+
+# Gradle files
+.gradle/
+/build/
+/local.properties
+gradle-app.setting
+gradle-wrapper.jar
+gradle-wrapper.properties
+
+# Android specific files
 *.apk
 *.ap_
 *.dex
@@ -31,25 +24,17 @@ local.properties
 *.classpath
 *.project
 *.settings/
-.cache/
+/.cache/
 *.keystore
 captures/
 output.json
 *.cxx/
-.externalNativeBuild/
+/externalNativeBuild/
 
 # Built application files
 /build/
 */build/
 **/build/
-
-# Gradle files
-.gradle/
-build/
-local.properties
-gradle-app.setting
-gradle-wrapper.jar
-gradle-wrapper.properties
 
 # Gradle caches (avoiding long re-downloads)
 **/out/
@@ -89,4 +74,3 @@ speech2text.json
 *.avi
 *.mov
 *.webp
-
