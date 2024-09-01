@@ -30,6 +30,7 @@ captures/
 output.json
 *.cxx/
 /externalNativeBuild/
+app/.gitignore
 
 # Built application files
 /build/

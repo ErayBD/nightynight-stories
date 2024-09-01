@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SpeechToText</string>
+    <string name="app_name">NightyNight Stories</string>
     <string name="recognize_microphone">Preparing\n</string>
     <string name="preparing">Starting\n</string>
     <string name="failed">Error\n</string>
