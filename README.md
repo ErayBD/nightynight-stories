@@ -36,7 +36,7 @@ Follow the steps below to set up and run the project on your local machine.
 - Create a project in the Google Cloud Console
 - Enable the Speech-to-Text API and create a service account.
 - Copy the generated JSON key file to the app/src/main/res/raw/ directory.
-- Update this line in "GoogleCloudActivity.java":
+- Update this line in "StoryBook.java":
   - ``` InputStream credentialsStream = getResources().openRawResource(R.raw.YOUR_JSON_FILENAME); ```
  
 <br>
