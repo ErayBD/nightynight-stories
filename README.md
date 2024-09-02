@@ -72,7 +72,7 @@ Follow the steps below to set up and run the project on your local machine.
 
 <br>
 
-### 6. Application Introduction Video GIF
+### 6. Application Introduction GIF
 ![2024-09-01_22-36-29-ezgif com-crop](https://github.com/user-attachments/assets/be21f352-2b4b-47b3-addb-4adc4a99b557)
 
 <br>
