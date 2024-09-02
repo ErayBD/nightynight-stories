@@ -73,7 +73,7 @@ Follow the steps below to set up and run the project on your local machine.
 <br>
 
 ### 6. Application Introduction Video GIF
-![2024-09-01_22-36-29-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/ab529591-4e01-4eac-8dc8-4d6ba98f32ef)
+![2024-09-01_22-36-29-ezgif com-crop](https://github.com/user-attachments/assets/be21f352-2b4b-47b3-addb-4adc4a99b557)
 
 <br>
 
@@ -81,44 +81,6 @@ Follow the steps below to set up and run the project on your local machine.
 <div align="left">
   <a href="https://www.youtube.com/shorts/iuPt7Q0OSqA" target="_blank"> <img src="https://github.com/user-attachments/assets/29176792-d1f9-473f-bfa3-5732536f10ed" alt="Video Title" style="width:50%;"></a>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
